@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
+import Sidebar from "./components/sidebar/Sidebar";
 
-const inter = Inter({ subsets: ["latin"] });
+const montserrat = Montserrat({ 
+  weight: ['300', '400', '500', '700'],
+  subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,9 +17,24 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const bodyStyle = `${montserrat.className} flex`
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+      <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css"
+    />
+      </head>
+      <body className={bodyStyle}>
+
+        <Sidebar></Sidebar>
+        <section className="grow h-dvh p-5">
+        {children}
+        </section>
+      </body>
     </html>
   );
 }
